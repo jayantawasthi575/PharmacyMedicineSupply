@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using PharmacyMedicineSupply.Model;
 using PharmacyMedicineSupply.Repository;
 using System.Collections.Generic;
+using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PharmacyMedicineSupply.Controllers
 {
@@ -15,11 +17,22 @@ namespace PharmacyMedicineSupply.Controllers
         {
             Pharm = new PharamacyMedicineRepo();
         }
+        [Authorize]
         [HttpGet]
         public IEnumerable<PharmacyMedicine> PharmacySupply([FromBody]List<MedicineDemand> med)
         {
-            IEnumerable<PharmacyMedicine> AllMed = Pharm.GetPharmacyMedicinesSupply(med);
-            return AllMed;
+            try
+            {
+                var token = HttpContext.Request.Headers["Authorization"];
+                IEnumerable<PharmacyMedicine> AllMed = Pharm.GetPharmacyMedicinesSupply(med,token);
+                if (AllMed == null)
+                    return null;
+                return AllMed;
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
     }
 }

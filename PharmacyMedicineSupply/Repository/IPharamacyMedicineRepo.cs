@@ -5,6 +5,6 @@ namespace PharmacyMedicineSupply.Repository
 {
     public interface IPharamacyMedicineRepo
     {
-        public IEnumerable<PharmacyMedicine> GetPharmacyMedicinesSupply(List<MedicineDemand> med);
+        public IEnumerable<PharmacyMedicine> GetPharmacyMedicinesSupply(List<MedicineDemand> med,string token);
     }
 }

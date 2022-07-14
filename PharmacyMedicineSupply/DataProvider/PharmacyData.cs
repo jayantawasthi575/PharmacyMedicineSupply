@@ -11,17 +11,19 @@ namespace PharmacyMedicineSupply.DataProvider
     {
         public List<string> Data = new List<string>() {"Pharmacy1","Pharmacy2","Pharmacy3","Pharmacy4","Pharmacy5"};
        
-        public List<Medicine> GetList()
+        public List<Medicine> GetList(string token)
         {
             List<Medicine> list = new List<Medicine>();
             //string BaseUrl = "https://localhost:44382/";
             //string BaseUrl = "https://localhost:5001/";
-            string BaseUrl="http://20.241.250.46/";
+            //string BaseUrl="http://20.241.250.46/";
+            string BaseUrl = "http://20.241.228.249/";
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(BaseUrl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("Authorization", token);
                 HttpResponseMessage response = new HttpResponseMessage();
 
                 try

@@ -6,6 +6,6 @@ namespace PharmacyMedicineSupply.DataProvider
     public interface IPharmacyData
     {
         public List<string> GetPharmacyName();
-        public List<Medicine> GetList();
+        public List<Medicine> GetList(string token);
     }
 }
